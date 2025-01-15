@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "database/dbconn.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -23,6 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if ($user) {
         if (password_verify($password, $user['userpass'])) {
+            $_SESSION['user_id']=$user['id'];
+            $_SESSION['user_email']=$user['email'];
+            $_SESSION['user_name']=$user['username'];
             header("Location: home.php");
             exit;
         } else {

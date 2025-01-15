@@ -11,6 +11,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = htmlspecialchars(trim($_POST['email']));
     $gender = htmlspecialchars(trim($_POST['gender']));
 
+
+    function validatePassword($password) {
+        if (
+            preg_match('/^(?=(?:[^a-z]*[a-z]){3})(?=(?:[^A-Z]*[A-Z]){3})(?=(?:[^0-9]*[0-9]){3})(?=(?:[^!@#$%^&*()\-\_=+\[\]{}<>?\/|]*[!@#$%^&*()\-\_=+\[\]{}<>?\/|]){3}).{12}$/', $password) &&
+            !preg_match('/(?i)([a-z]).*\1/i', $password)
+        ) {
+            return TRUE;
+        }
+        return FALSE;
+    }
     
     if ($name === ''){
         header("Location: signup.php?error= يرجى عدم ترك الاسم فارغا ");
@@ -35,6 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         header("Location: signup.php?error= لا يمكنك انشاء حساب بدون كلمة مرور ");
         exit;   
     }
+    
+    if (validatePassword) {
+        header("Location: signup.php?error=كلمة المرور يجب أن تكون 12 حرفًا، تتضمن 3 أحرف صغيرة، 3 أحرف كبيرة، 3 أرقام، و3 رموز.");
+        exit;
+    }
+    
+
     if ($confirm_password === ''){
         header("Location: signup.php?error= يرجى تاكيد كلمة المرور ");
         exit;   
@@ -45,10 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         exit;
     }
 
-    if (!preg_match('/^7\d{8}$/', $phone)) {
-        header("Location: signup.php?error=الرقم يجب أن يبدأ بـ7 ويتكون من 9 أرقام");
+    if (!preg_match('/^(70|71|73|77|78)\d{7}$/', $phone)) {
+        header("Location: signup.php?error=الرقم يجب أن يبدأ بـ70 أو 71 أو 73 أو 77 أو 78 ويتكون من 9 أرقام");
         exit;
     }
+
     if ($gender === ''){
         header("Location: signup.php?error= من الضروري تحديد جنسك يا غالي (ذكر , أنثى) ");
         exit;   
