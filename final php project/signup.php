@@ -16,12 +16,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (
             preg_match('/^(?=(?:[^a-z]*[a-z]){3})(?=(?:[^A-Z]*[A-Z]){3})(?=(?:[^0-9]*[0-9]){3})(?=(?:[^!@#$%^&*()\-\_=+\[\]{}<>?\/|]*[!@#$%^&*()\-\_=+\[\]{}<>?\/|]){3}).{12}$/', $password) &&
             !preg_match('/(?i)([a-z]).*\1/i', $password)
-        ) {
-            return TRUE;
+            ) {
+                return TRUE;
+            }
+            return FALSE;
         }
-        return FALSE;
+        
+    if (!validatePassword($password)) {
+        header("Location: signup.php?error=كلمة المرور يجب أن تكون 12 حرفًا، تتضمن 3 أحرف صغيرة، 3 أحرف كبيرة، 3 أرقام، و3 رموز.");
+        exit;
     }
-    
+
     if ($name === ''){
         header("Location: signup.php?error= يرجى عدم ترك الاسم فارغا ");
         exit;   
@@ -46,10 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         exit;   
     }
     
-    if (validatePassword) {
-        header("Location: signup.php?error=كلمة المرور يجب أن تكون 12 حرفًا، تتضمن 3 أحرف صغيرة، 3 أحرف كبيرة، 3 أرقام، و3 رموز.");
-        exit;
-    }
     
 
     if ($confirm_password === ''){

@@ -5,45 +5,60 @@ Created by Rasmus Lerdorf in 1994, PHP is now used on millions of websites world
 PHP code is executed on the server, and it supports a wide range of databases and frameworks.
 EOD;
 
-echo "1. البحث عن كلمة 'PHP':\n";
+echo "<div style='font-family: Arial, sans-serif; font-size: 25px; color: red;'>من المقالة التالية قم بالاتي:</div>";
+echo '<br>';
+echo $article;
+echo '<br><br>';
+
+
+echo "<div style='font-family: Arial, sans-serif; font-size: 25px; color: red;'>1. البحث عن كلمة 'PHP':</div>";
+echo '<br>';
 if (preg_match("/PHP/", $article)) {
     echo "Found 'PHP' in the article.\n";
 } else {
     echo "'PHP' not found.\n";
 }
 echo '<br><br>';
-
-echo "\n2. استخراج جميع الأرقام:\n";
+echo "<div style='font-family: Arial, sans-serif; font-size: 25px; color: red;'>2. استخراج جميع الأرقام:</div>";
+echo '<br>';
 preg_match_all("/\d+/", $article, $matches);
 print_r($matches[0]);
 echo '<br><br>';
-
-echo "\n3. استبدال كلمة 'PHP' بـ 'PHP (Hypertext Preprocessor)':\n";
+echo "<div style='font-family: Arial, sans-serif; font-size: 25px; color: red;'>3. استبدال كلمة 'PHP' بـ 'PHP (Hypertext Preprocessor)':</div>";
+echo '<br>';
 $updatedArticle = preg_replace("/PHP/", "PHP (Hypertext Preprocessor)", $article);
 echo $updatedArticle;
 echo '<br><br>';
 
-echo "\n4. تقسيم النص إلى جمل:\n";
+
+echo "<div style='font-family: Arial, sans-serif; font-size: 25px; color: red;'>4. تقسيم النص إلى جمل:</div>";
+echo '<br>';
 $sentences = preg_split("/\.\s*/", $article);
 print_r($sentences);
 echo '<br><br>';
 
-echo "\n5. الكلمات التي تبدأ بحرف كبير:\n";
+echo "<div style='font-family: Arial, sans-serif; font-size: 25px; color: red;'>5. الكلمات التي تبدأ بحرف كبير:</div>";
+echo '<br>';
 preg_match_all("/\b[A-Z][a-z]*\b/", $article, $matches);
 print_r($matches[0]);
 echo '<br><br>';
 
-echo "\n6. الكلمات التي تحتوي على الحرف 'e':\n";
+
+echo "<div style='font-family: Arial, sans-serif; font-size: 25px; color: red;'>6. الكلمات التي تحتوي على الحرف 'e':</div>";
+echo '<br>';
 preg_match_all("/\b\w*e\w*\b/", $article, $matches);
 print_r($matches[0]);
 echo '<br><br>';
 
-echo "\n7. حذف جميع علامات الترقيم:\n";
+
+echo "<div style='font-family: Arial, sans-serif; font-size: 25px; color: red;'>7. حذف جميع علامات الترقيم:</div>";
+echo '<br>';
 $cleanedArticle = preg_replace("/[.,]/", "", $article);
 echo $cleanedArticle;
 echo '<br><br>';
 
-echo "\n8. التحقق من طول النص بعد حذف الكلمات التي تحتوي على أرقام:\n";
+echo "<div style='font-family: Arial, sans-serif; font-size: 25px; color: red;'>8. التحقق من طول النص بعد حذف الكلمات التي تحتوي على أرقام:</div>";
+echo '<br>';
 $shortenedArticle = preg_replace("/\b\w*\d\w*\b/", "", $article);
 echo "Original Length: " . strlen($article) . "\n";
 echo "Shortened Length: " . strlen($shortenedArticle) . "\n";
